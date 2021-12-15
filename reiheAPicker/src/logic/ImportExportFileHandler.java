@@ -2,12 +2,16 @@ package logic;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.ByteOrderMark;
@@ -23,7 +27,37 @@ public class ImportExportFileHandler {
 	public static List<List<String>> importCsv() throws IOException
 	{		
 		return(getFileStringListFromFile(getFile()));
+	}	
+	
+	public static void exportFile(String contentString, String location)
+	{
+		
+		PropertyFileHandler propertyFileHandler = PropertyFileHandler.getInstance();
+		  try{			  
+			  
+			  /*
+				javafx.stage.FileChooser fileChooser = new javafx.stage.FileChooser();
+				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("All Files", "*.*"));
+				File userSelection = fileChooser.showSaveDialog(new Stage());			  
+			    */			  
+			  
+		FileWriter fstream = new FileWriter(location + getTimeStamp() + "_ReiheA.txt");
+		
+        BufferedWriter out = new BufferedWriter(fstream);
+        out.write(contentString);
+        //Close the output stream
+        out.close();
+    	}catch (Exception e){//Catch exception if any
+    		System.err.println("Error: " + e.getMessage());
+    	}
 	}
+	
+	private static String getTimeStamp()
+	{
+		SimpleDateFormat formatter= new SimpleDateFormat("yyyyMMdd_HHmmss");
+		String date = formatter.format(System.currentTimeMillis());
+		return date;
+	}	
 	
 	private static File getFile()
 	{
@@ -141,7 +175,7 @@ public class ImportExportFileHandler {
 				
 			}
 
-			        
+	        
  
 			
 
