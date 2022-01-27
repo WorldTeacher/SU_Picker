@@ -52,6 +52,18 @@ public class ImportExportFileHandler {
     	}
 	}
 	
+	public void openExportFileFolder() throws IOException
+	{
+		PropertyFileHandler propertyFileHandler = PropertyFileHandler.getInstance();
+		Runtime.getRuntime().exec("explorer " + propertyFileHandler.propertyFileModel.get_settings_ExportFileFolder());
+	}
+	
+	public void openSaveFileFolder() throws IOException
+	{
+		PropertyFileHandler propertyFileHandler = PropertyFileHandler.getInstance();
+		Runtime.getRuntime().exec("explorer " + propertyFileHandler.propertyFileModel.get_settings_SaveFileFolder());
+	}
+	
 	private static String getTimeStamp()
 	{
 		SimpleDateFormat formatter= new SimpleDateFormat("yyyyMMdd_HHmmss");
@@ -64,16 +76,9 @@ public class ImportExportFileHandler {
 		//text: User input; 
 		File fileChosen = null;
 		
-		if (Constants.debugMode && !Constants.debugFilePath.isBlank())
-		{
-			fileChosen = new File(Constants.debugFilePath);
-		} else
-		{
 			javafx.stage.FileChooser fileChooser = new javafx.stage.FileChooser();
 			fileChooser.getExtensionFilters().addAll(new ExtensionFilter("All Files", "*.*"));
 			fileChosen = fileChooser.showOpenDialog(new Stage());
-		}
-		
 		
 		
 		if (fileChosen == null)
