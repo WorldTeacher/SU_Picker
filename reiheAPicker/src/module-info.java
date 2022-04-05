@@ -5,5 +5,11 @@ module reiheAPicker {
 	requires javafx.base;
 	requires java.desktop;
 	requires java.xml;
-	opens userInterface to javafx.graphics;
+	requires org.jsoup;
+	requires org.json;
+	requires commons.lang;
+	requires poi;
+	requires poi.ooxml;
+	requires java.base;
+	opens launcher to javafx.graphics;
 }
